@@ -1,0 +1,193 @@
+<!doctype html>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Courier+Prime&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<head>
+	<title>Textract</title>
+	<style>
+		.flashes{
+			text-align:center;
+			color: red;
+		}
+		hr.style-two {
+    		border: 0;
+    		height: 1px;
+    		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+		}
+		#copy
+		{
+			height:30px;
+			width:150px;
+			border-radius:8px;
+			padding:10px;
+			font-size:20px;
+			font-family: 'Montserrat', sans-serif;
+			height:52px;
+			color: white;
+			cursor:pointer;
+			background-color:#ff0038;
+		}
+		#div1{
+			border: 5px inset red;
+			padding: 5px;
+		}
+		#typewriter{
+			font-size: 35px;
+			text-align: center;
+    		font-family: 'Courier Prime', monospace;
+    	}
+		span{
+			color: red;
+			font-weight: bold;
+		}
+		@keyframes blink{
+			0%{opacity: 0;}
+			50%{opacity: .5;}
+			100%{opacity: 1;}
+		}
+	</style>
+</head>
+
+<body>
+<br>
+	<h1 style="text-align: center; color:red; font-family: 'Julius Sans One', sans-serif;"><b>Textract</b></h1>
+	<h4 style="text-align: center;">Text Extractor for Documents & Images</h4><hr><br>
+	<div id="typewriter"></div><br>
+	<h6 style="text-align: center;">Upload an image with .jpeg, .jpg or .png file extension only.</h6>
+	<form method="post" action="/" enctype="multipart/form-data">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-4" >
+				<input type="file" class="custom-file-input" name="file" id="customFile" autocomplete="off" required>
+				 <label class="custom-file-label" for="customFile">Choose file</label>
+				</div>
+				<div class="col-1">
+				<button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+				</div>
+			</div>
+
+		</div>
+	</form>
+	<p>
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+			<ul class=flashes>
+			{% for message in messages %}
+			  <li>{{ message }}</li>
+			{% endfor %}
+			</ul>
+		  {% endif %}
+		{% endwith %}
+	</p>
+	{% if filename %}
+		<div class="container">
+		<br><p id="blink" style="text-align:center; animation: blink 1.5s linear infinite; font-size:20px;">Your OCRed text is ready</p>
+			<div class="row justify-content-center">
+				<img src="{{ url_for('display_image', filename=filename) }}" width="300px" height="300px">
+				<div id="div1">
+					<pre id="tt">{{ text }}</pre>
+				</div>
+			</div><br>
+			<div class="row justify-content-center">
+				<button class="btn" id="copy" onclick="CopyToClipboard('div1')">Copy text <i class="fa fa-clipboard" style="color:white"></i></button>
+			</div>
+			<br><br>
+		</div>
+	{% endif %}
+
+	<br><p style="text-align: center;"><i class="fa fa-copyright"></i> Copyright 2020 by <font color="red">Textract.</font></p><br>
+	<script>
+            $('#customFile').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+
+			function CopyToClipboard(containerid) {
+			  if (document.selection) {
+				var range = document.body.createTextRange();
+				range.moveToElementText(document.getElementById(containerid));
+				range.select().createTextRange();
+				document.execCommand("copy");
+			  } else if (window.getSelection) {
+				var range = document.createRange();
+				range.selectNode(document.getElementById(containerid));
+				window.getSelection().addRange(range);
+				document.execCommand("copy");
+				alert("Text has been copied, now paste in the text-area")
+			  }
+			}
+
+			var dataText = [
+				"Welcome to <span>Textract</span>!"
+			];
+
+			// typewriter speed
+			// set delay time between each character typing time
+			var CharDelay = 120;
+
+			// pause time between each completed word (delay before next word starts)
+			var WordPause = 1000;
+
+			// set initial word in dataText array
+			var WordOffset = 0;
+
+			// set sequence restart interval N [ms]
+			var RestartInterval = 3000;
+
+			// type one text in the typewriter
+			// keeps calling itself until complete word is printed
+			function typeWriter(text, i, fnCallback) {
+				// check if word isn't finished yet
+				if (i < (text.length)) {
+					// add next character to html
+					document.querySelector("#typewriter").innerHTML = text.substring(0, i+1) + '<span aria-hidden="true"></span>';
+
+					// wait for a while and call this function again for next character
+					setTimeout(function() {
+						typeWriter(text, i+1, fnCallback)
+					}, CharDelay);
+				}
+
+				// text finished, call callback if there is a callback function
+				else if (typeof fnCallback == 'function') {
+					// call callback after timeout
+					setTimeout(fnCallback, WordPause);
+				}
+			}
+
+			// start a typewriter animation in the dataText array
+			// @param int j = dataText array word index
+			function StartTextAnimation(j) {
+				//console.log(j);
+				//console.log(dataText.length);
+				// restart animation after N seconds
+				if (typeof dataText[j] == 'undefined' || j == dataText.length) {
+					setTimeout(function() {
+						StartTextAnimation(WordOffset);
+					}, RestartInterval);
+				}
+
+				// check if dataText[j] exists
+				else if (j < dataText[j].length) {
+					// text exists! start typewriter animation
+					typeWriter(dataText[j], 0, function() {
+						// after callback (and whole text has been animated), start next word
+						StartTextAnimation((j+1));
+					});
+				}
+			}
+
+			document.addEventListener('DOMContentLoaded', function(event) {
+				// start text animation
+				StartTextAnimation(WordOffset);
+			});
+    </script>
+</body>
+
+</html>
