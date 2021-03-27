@@ -18,3 +18,4 @@ def ocr_text(filename):
     text = pytesseract.image_to_string(adaptive_threshold, config=config)
 
     return text
+

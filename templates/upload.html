@@ -9,14 +9,24 @@
 <head>
 	<title>Textract</title>
 	<style>
+		body{
+			background-color: #fcfcfc;
+			background-image: url(http://www.transparenttextures.com/patterns/textured-paper.png);
+		}
 		.flashes{
 			text-align:center;
 			color: red;
 		}
-		hr.style-two {
-    		border: 0;
-    		height: 1px;
-    		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+		hr {
+		border:none;
+		height: 20px;
+		width: 100%;
+		height: 50px;
+		margin-top: 0;
+		border-bottom: 1px solid #aab7b8;
+		box-shadow: 0 15px 15px -15px #333;
+		margin: -50px auto 10px;
+
 		}
 		#copy
 		{
@@ -34,6 +44,7 @@
 		#div1{
 			border: 5px inset red;
 			padding: 5px;
+			background-color:  #fbfcfc;
 		}
 		#typewriter{
 			font-size: 35px;
@@ -41,7 +52,7 @@
     		font-family: 'Courier Prime', monospace;
     	}
 		span{
-			color: red;
+			color: #d80000;
 			font-weight: bold;
 		}
 		@keyframes blink{
@@ -49,15 +60,20 @@
 			50%{opacity: .5;}
 			100%{opacity: 1;}
 		}
+		#head{
+			background-image : url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);
+		}
 	</style>
 </head>
 
 <body>
-<br>
-	<h1 style="text-align: center; color:red; font-family: 'Julius Sans One', sans-serif;"><b>Textract</b></h1>
-	<h4 style="text-align: center;">Text Extractor for Documents & Images</h4><hr><br>
+	<div id="head">
+		<h1 style="text-align: center; color:#a50000; font-family: 'Julius Sans One', sans-serif;padding-top:10px; text-shadow: 2px 2px 2px #e74c3c;"><b>Textract</b></h1>
+		<h4 style="text-align: center; font-weight: 600;">Text Extractor for Scanned Documents & Images</h4><hr>
+	</div>
+	<br>
 	<div id="typewriter"></div><br>
-	<h6 style="text-align: center;">Upload an image with .jpeg, .jpg or .png file extension only.</h6>
+	<h6 style="text-align: center;">Upload a file with .jpeg, .jpg, .png or .pdf file extension only.</h6>
 	<form method="post" action="/" enctype="multipart/form-data">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -87,7 +103,7 @@
 		<div class="container">
 		<br><p id="blink" style="text-align:center; animation: blink 1.5s linear infinite; font-size:20px;">Your OCRed text is ready</p>
 			<div class="row justify-content-center">
-				<img src="{{ url_for('display_image', filename=filename) }}" width="300px" height="300px">
+				<img src="{{ url_for('display_image', filename=filename) }}" width="400vw" height="500vh">
 				<div id="div1">
 					<pre id="tt">{{ text }}</pre>
 				</div>
@@ -99,7 +115,7 @@
 		</div>
 	{% endif %}
 
-	<br><p style="text-align: center;"><i class="fa fa-copyright"></i> Copyright 2020 by <font color="red">Textract.</font></p><br>
+	<br><p style="text-align: center;"><i class="fa fa-copyright"></i> Copyright 2021 by <font color="#d80000">Textract.</font></p><br>
 	<script>
             $('#customFile').on('change',function(){
                 //get the file name
