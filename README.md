@@ -23,12 +23,12 @@
 ### 1. Desktop Version
 
 * The link [http://18.222.220.89:5000/](http://18.222.220.89:5000/) lands on this page, where you can submit the file from which you want to extract text.
-  <p>
+  <p align="center">
     <img src="https://github.com/simranbiswas/Textract/blob/main/images/intro.PNG" width="500" height="250" title="intro">
   </p>
   
 * After uploading and submitting a file, the result appear as shown in the image and you click on **Copy To Clipboard** to copy and use the text as you want. 
-  <p>
+  <p align="center">
     <img src="https://github.com/simranbiswas/Textract/blob/main/images/Capture.PNG" width="500" height="300" title="capt">
   </p>
   
