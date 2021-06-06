@@ -42,12 +42,21 @@
   
 * Upload an image and the results come out as follows. Then simply copy-paste the text and use it as per you requirement.
   <p align="center">
-    <img src="https://github.com/simranbiswas/Textract/blob/main/images/result.png" width="175" height="300" title="result">
-    
+    <img src="https://github.com/simranbiswas/Textract/blob/main/images/result.png" width="175" height="300" title="result">   
+    <img src="http://www.pngall.com/wp-content/uploads/2016/07/Arrow-Free-Download-PNG.png" width="100" height="100" title="arrow">   
      <img src="https://github.com/simranbiswas/Textract/blob/main/images/cc.png" width="175" height="300" title="cc">
   </p>
   
   
-  
+## Technology Used:
+
+* Flask
+* Tesseract OCR Engine
+* TensorFlow, OpenCV
+* Flutter
+* AWS (Deployment)
+
+
+
   
   
