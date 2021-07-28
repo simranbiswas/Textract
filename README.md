@@ -6,7 +6,7 @@
 
 ## Application Link:
 
-* Desktop Version (For images & PDF's) : [http://18.222.220.89:5000/](http://18.222.220.89:5000/)
+* Desktop Version (For images & PDF's) : [http://18.222.220.89:5000/](http://18.222.220.89:5000/) (currently AWS instance is terminated)
 * Mobile Version (Downloadable APK package only for images) : [https://drive.google.com/file/d/1JLeMwO4LZjzQcbgoA5ARX-z3L8OsZ4-M/view?usp=sharing](https://drive.google.com/file/d/1JLeMwO4LZjzQcbgoA5ARX-z3L8OsZ4-M/view?usp=sharing)
 
 ## Flow of the Application
